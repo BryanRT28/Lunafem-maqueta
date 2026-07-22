@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunafem | Ginecología Especializada y Estética</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Playfair Display para títulos elegantes y Outfit para lectura moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        marca: {
+                            pink: '#D81B60', /* Magenta/Rosa fuerte elegante */
+                            pinkLight: '#FCE4EC', /* Fondo rosa muy suave */
+                            pinkDark: '#AD1457',
+                            gold: '#D4AF37', /* Toques dorados sutiles */
+                            text: '#4A4A4A',
+                            dark: '#2D3748',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        heading: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-marca-text bg-marca-pinkLight/30 selection:bg-marca-pink selection:text-white">
+
+    <!-- Navegación Principal -->
+    <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-pink-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-24">
+                
+                <!-- Logo Redondo y Grande -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <div class="h-16 w-16 sm:h-20 sm:w-20 bg-white rounded-full flex items-center justify-center overflow-hidden border-[3px] border-marca-pinkLight shadow-sm">
+                        <img src="img/logo.jpg" alt="Logo Lunafem" class="h-full w-full object-cover" onerror="this.style.display='none'">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <span class="font-heading font-bold text-2xl sm:text-3xl tracking-wide text-marca-pink leading-none">Lunafem</span>
+                        <span class="text-[10px] sm:text-[11px] text-gray-500 font-semibold uppercase tracking-widest leading-tight mt-1">Salud Femenina</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#nosotros" class="text-sm font-semibold text-gray-600 hover:text-marca-pink transition-colors">La Clínica</a>
+                    <a href="#servicios" class="text-sm font-semibold text-gray-600 hover:text-marca-pink transition-colors">Tratamientos</a>
+                    <a href="#resultados" class="text-sm font-semibold text-gray-600 hover:text-marca-pink transition-colors">Resultados</a>
+                    <a href="#sedes" class="text-sm font-semibold text-gray-600 hover:text-marca-pink transition-colors">Sedes</a>
+                    
+                    <!-- Botón de Cita -->
+                    <a href="https://wa.me/51904148850?text=Hola,%20deseo%20agendar%20una%20cita%20en%20Lunafem." target="_blank" class="bg-marca-pink hover:bg-marca-pinkDark text-white px-7 py-3 rounded-full text-sm font-bold transition-all shadow-lg shadow-marca-pink/30 flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        Agendar Cita
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-marca-pink p-3 focus:outline-none active:scale-95 transition-transform">
+                        <svg class="h-8 w-8 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[100] bg-white/98 backdrop-blur-md transform translate-x-full transition-transform duration-300 flex flex-col hidden">
+        <div class="p-6 flex justify-end">
+            <button id="close-menu-btn" class="text-gray-500 p-3 focus:outline-none active:scale-95 transition-transform">
+                <svg class="h-10 w-10 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div class="flex flex-col items-center justify-center flex-grow space-y-8 pb-20">
+            <div class="font-heading text-4xl text-marca-pink font-bold mb-4">Lunafem</div>
+            <a href="#nosotros" class="mobile-link text-2xl font-medium text-gray-700 hover:text-marca-pink transition-colors">La Clínica</a>
+            <a href="#servicios" class="mobile-link text-2xl font-medium text-gray-700 hover:text-marca-pink transition-colors">Especialidades</a>
+            <a href="#resultados" class="mobile-link text-2xl font-medium text-gray-700 hover:text-marca-pink transition-colors">Resultados</a>
+            <a href="#sedes" class="mobile-link text-2xl font-medium text-gray-700 hover:text-marca-pink transition-colors">Ubicaciones</a>
+            
+            <a href="https://wa.me/51904148850" target="_blank" class="bg-marca-pink text-white px-10 py-4 rounded-full text-xl font-bold shadow-lg mt-6">WhatsApp: 904 148 850</a>
+        </div>
+    </div>
+
+    <!-- WhatsApp Flotante -->
+    <a href="https://wa.me/51904148850" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-50 flex items-center justify-center">
+        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.183-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.765-5.77zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.289.129.332.202.043.073.043.423-.101.827z"/></svg>
+    </a>
+
+    <main>
+      <!-- Hero Section Estilo Editorial / Boutique (Altura Optimizada) -->
+        <header class="relative w-full flex items-center bg-marca-pinkLight/30 py-12 lg:py-20 overflow-hidden min-h-[60vh] lg:min-h-[75vh]">
+            
+            <!-- Contenedor de la Imagen (Ocupa el 65% derecho en Desktop, 100% arriba en móvil) -->
+            <div class="absolute top-0 right-0 w-full lg:w-[65%] h-[45vh] lg:h-full z-0">
+                <img src="img/portada.png" alt="Dra. Guadalupe Tembladera" class="w-full h-full object-cover object-top lg:object-center">
+                <!-- Overlay degradado solo para móvil para fusionar la imagen con el fondo -->
+                <div class="absolute inset-0 bg-gradient-to-t from-marca-pinkLight/80 via-transparent to-transparent lg:hidden"></div>
+            </div>
+
+            <!-- Contenedor del contenido principal -->
+            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center mt-[30vh] sm:mt-[35vh] lg:mt-0">
+                
+                <!-- Tarjeta de Contenido Editorial Superpuesta -->
+                <div class="w-full lg:w-[55%] xl:w-[50%] bg-white/95 backdrop-blur-xl p-8 sm:p-10 lg:p-12 rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(216,27,96,0.15)] border border-pink-50 fade-in-up">
+                    
+                    <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-marca-pink/10 text-marca-pink text-[11px] sm:text-xs font-bold tracking-widest uppercase mb-5">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
+                        Ginecología & Estética
+                    </span>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-marca-dark tracking-tight mb-5 leading-[1.15]">
+                        Cuidando de ti, <br>
+                        <span class="text-marca-pink italic font-normal">Mujer a Mujer</span>
+                    </h1>
+                    
+                    <!-- Línea decorativa sutil -->
+                    <div class="w-14 h-1 bg-marca-pink mb-5 rounded-full"></div>
+                    
+                    <p class="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed font-medium">
+                        Acompañamos cada etapa de tu vida. Desde la salud íntima y planificación familiar, hasta la armonización estética y rejuvenecimiento con tecnología de vanguardia.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="https://wa.me/51904148850?text=Hola,%20deseo%20agendar%20una%20cita%20con%20la%20Dra.%20Tembladera." target="_blank" class="bg-marca-pink text-white px-7 py-3.5 sm:py-4 rounded-2xl font-bold text-base sm:text-lg hover:bg-marca-pinkDark transition-all shadow-lg shadow-marca-pink/30 text-center">
+                            Agendar Evaluación
+                        </a>
+                        <a href="#servicios" class="bg-marca-pinkLight/30 border border-marca-pink/20 text-marca-pink hover:bg-marca-pinkLight/60 px-7 py-3.5 sm:py-4 rounded-2xl font-bold text-base sm:text-lg transition-colors text-center">
+                            Ver Especialidades
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+        </header>
+
+        <!-- Feature Bar ESTÁTICA (Sin animaciones) -->
+        <div class="bg-white py-8 border-b border-gray-100 shadow-sm relative z-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                    <div class="py-3 md:py-0 text-marca-dark">
+                        <p class="font-heading font-bold text-2xl text-marca-pink">Salud Integral</p>
+                        <p class="text-sm text-gray-500 font-medium mt-1">Ginecología, fertilidad y obstetricia</p>
+                    </div>
+                    <div class="py-3 md:py-0 text-marca-dark">
+                        <p class="font-heading font-bold text-2xl text-marca-pink">Estética y Regeneración</p>
+                        <p class="text-sm text-gray-500 font-medium mt-1">Armonización íntima, facial y corporal</p>
+                    </div>
+                    <div class="py-3 md:py-0 text-marca-dark">
+                        <p class="font-heading font-bold text-2xl text-marca-pink">Trato Humanizado</p>
+                        <p class="text-sm text-gray-500 font-medium mt-1">Empatía, respeto y privacidad garantizada</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nosotros (Dra. Guadalupe Tembladera) -->
+        <section id="nosotros" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-16 items-center">
+                    
+                    <div class="lg:w-1/2 order-2 lg:order-1 fade-in-up">
+                        <h2 class="text-marca-pink font-bold tracking-widest uppercase text-sm mb-2">Dirección Médica</h2>
+                        <h3 class="text-3xl md:text-5xl font-heading font-bold text-marca-dark mb-4 leading-tight">Dra. Guadalupe Tembladera</h3>
+                        <p class="text-marca-gold font-semibold tracking-wide mb-6 uppercase text-sm">Médico Ginecóloga • CMP: 64987 | RNE: 45929</p>
+                        <div class="w-20 h-1 bg-marca-pinkLight mb-6 rounded-full"></div>
+                        
+                        <p class="text-gray-600 text-lg mb-6 leading-relaxed font-medium">
+                            En <strong class="text-marca-pink">Lunafem</strong>, creemos que sentirte bien también es parte de tu salud. Hemos creado un centro ginecológico pensado exclusivamente en la mujer de hoy.
+                        </p>
+                        <p class="text-gray-600 mb-8 leading-relaxed">
+                            Nuestra misión es acompañarte con profesionalismo y amor en cada etapa: desde tus chequeos preventivos, la hermosa búsqueda de la maternidad (fertilidad y cesárea humanizada), hasta el cuidado durante la menopausia y la aplicación de protocolos estéticos de vanguardia para realzar tu belleza natural.
+                        </p>
+                        
+                        <a href="https://wa.me/51904148850" target="_blank" class="inline-flex items-center text-marca-pink font-bold hover:text-marca-pinkDark transition-colors">
+                            Conversar con la Doctora
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+
+                    <div class="lg:w-1/2 order-1 lg:order-2 w-full fade-in-up delay-100">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-marca-pinkLight/50 rounded-[2rem] transform translate-x-4 translate-y-4"></div>
+                            <!-- Usando la foto del flyer de fertilidad centrada en ella -->
+                            <img src="img/doctora.png" alt="Dra. Guadalupe Tembladera" class="relative z-10 w-full h-[500px] object-cover object-top rounded-[2rem] shadow-xl border-4 border-white">
+                            
+                            <div class="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl z-20 border border-pink-50 hidden sm:block">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-14 h-14 bg-pink-50 rounded-full flex items-center justify-center text-marca-pink">
+                                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-marca-dark text-lg">Tu bienestar</p>
+                                        <p class="text-sm text-gray-500 font-medium">Es nuestra misión</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Barra de Estadísticas Animada -->
+        <section class="py-12 bg-marca-pink overflow-hidden counter-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/20">
+                    <div class="fade-in-up">
+                        <div class="flex items-center justify-center text-white text-4xl sm:text-5xl font-bold mb-2">
+                            <span class="counter" data-target="1.4">0</span>k+
+                        </div>
+                        <p class="text-pink-200 font-semibold uppercase tracking-wider text-xs sm:text-sm">Seguidoras</p>
+                    </div>
+                    <div class="fade-in-up delay-100">
+                        <div class="flex items-center justify-center text-white text-4xl sm:text-5xl font-bold mb-2">
+                            <span class="counter" data-target="2">0</span>
+                        </div>
+                        <p class="text-pink-200 font-semibold uppercase tracking-wider text-xs sm:text-sm">Sedes Clínicas</p>
+                    </div>
+                    <div class="fade-in-up delay-200">
+                        <div class="flex items-center justify-center text-white text-4xl sm:text-5xl font-bold mb-2">
+                            <span class="counter" data-target="100">0</span>%
+                        </div>
+                        <p class="text-pink-200 font-semibold uppercase tracking-wider text-xs sm:text-sm">Trato Humanizado</p>
+                    </div>
+                    <div class="fade-in-up delay-300">
+                        <div class="flex items-center justify-center text-white text-4xl sm:text-5xl font-bold mb-2">
+                            <span class="counter" data-target="15">0</span>+
+                        </div>
+                        <p class="text-pink-200 font-semibold uppercase tracking-wider text-xs sm:text-sm">Tratamientos Estéticos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Especialidades Médicas y Estéticas -->
+        <section id="servicios" class="py-24 bg-marca-pinkLight/30 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                    <h2 class="text-marca-pink font-bold tracking-widest uppercase text-sm mb-2">Descubre Nuestros Paquetes Exclusivos</h2>
+                    <h3 class="text-3xl md:text-5xl font-heading font-bold text-marca-dark mb-6">Salud y Belleza Integral</h3>
+                    <p class="text-gray-600 text-lg font-medium">Atención médica personalizada y tecnología de vanguardia para realzar tu bienestar.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- Tarjeta 1: Fertilidad -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col fade-in-up group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1531983412531-1f49a365ffed?auto=format&fit=crop&w=600&q=80" alt="Consulta de Fertilidad" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-marca-pink/20"></div>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h4 class="text-xl font-heading font-bold text-marca-dark mb-3">Consulta en Fertilidad</h4>
+                            <p class="text-gray-500 mb-4 text-sm font-medium leading-relaxed">Te acompañamos en tu camino hacia tu sueño de ser mamá con evaluación personalizada.</p>
+                            <ul class="space-y-2 text-sm text-gray-600 font-medium">
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Conteo de folículos antrales</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Dosaje de hormona antimulleriana</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Historial clínico y planificación</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 2: Cesárea Humanizada -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col fade-in-up delay-100 group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?auto=format&fit=crop&w=600&q=80" alt="Cesárea Humanizada" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-marca-pink/20"></div>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h4 class="text-xl font-heading font-bold text-marca-dark mb-3">Cesárea Humanizada</h4>
+                            <p class="text-gray-500 mb-4 text-sm font-medium leading-relaxed">Nacer con amor. Atención centrada en el respeto, la empatía y el bienestar de mamá y bebé.</p>
+                            <ul class="space-y-2 text-sm text-gray-600 font-medium">
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Contacto piel a piel inmediato</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Papá presente en el nacimiento</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Ambiente cálido y seguro</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 3: Ginecología Estética -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col fade-in-up delay-200 group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=600&q=80" alt="Salud Femenina" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-marca-pink/20"></div>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h4 class="text-xl font-heading font-bold text-marca-dark mb-3">Ginecología Regenerativa</h4>
+                            <p class="text-gray-500 mb-4 text-sm font-medium leading-relaxed">Cuidamos tu salud íntima y te apoyamos en los cambios hormonales y funcionales.</p>
+                            <ul class="space-y-2 text-sm text-gray-600 font-medium">
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Armonización íntima femenina</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Manejo integral de la Menopausia</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Rejuvenecimiento y salud hormonal</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta 4: Medicina Estética -->
+                    <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 flex flex-col fade-in-up delay-300 group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=80" alt="Medicina Estética" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-marca-pink/20"></div>
+                        </div>
+                        <div class="p-6 flex-grow">
+                            <h4 class="text-xl font-heading font-bold text-marca-dark mb-3">Medicina Estética</h4>
+                            <p class="text-gray-500 mb-4 text-sm font-medium leading-relaxed">Realza tu belleza de forma natural con tratamientos faciales y corporales de vanguardia.</p>
+                            <ul class="space-y-2 text-sm text-gray-600 font-medium">
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Rejuvenecimiento, Dermapen y Plasma</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Reducción y Reafirmación corporal</li>
+                                <li class="flex items-start gap-2"><span class="text-marca-pink mt-1">♡</span> Drenaje linfático y Modelado</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Casos de Éxito (Medicina Estética) -->
+        <section id="resultados" class="py-24 bg-white border-t border-gray-100 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                    <span class="text-marca-pink font-bold tracking-widest uppercase text-sm mb-2 block">Evidencia Médica</span>
+                    <h3 class="text-3xl md:text-5xl font-heading font-bold text-marca-dark mb-6">Resultados Estéticos</h3>
+                    <p class="text-gray-600 text-lg font-medium">Protocolos personalizados y naturales para el cuidado de tu piel y cuerpo.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto">
+                    <!-- Caso 1: Rejuvenecimiento Facial -->
+                    <div class="bg-marca-pinkLight/20 rounded-[2rem] p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-pink-100 fade-in-up">
+                        <h4 class="text-2xl font-heading font-bold text-marca-dark mb-6 text-center">Rejuvenecimiento Facial</h4>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="w-1/2 relative rounded-xl overflow-hidden border border-gray-200">
+                                    <span class="absolute top-3 left-3 bg-marca-dark text-white text-xs font-bold px-3 py-1 rounded shadow-md z-10">ANTES</span>
+                                    <img src="img/facial antes.jpg"w-full h-40 sm:h-56 object-cover filter sepia-[0.2]" alt="Antes facial">
+                                </div>
+                                <div class="w-1/2 relative rounded-xl overflow-hidden border border-gray-200 shadow-md">
+                                    <span class="absolute top-3 left-3 bg-marca-pink text-white text-xs font-bold px-3 py-1 rounded shadow-md z-10">DESPUÉS</span>
+                                    <img src="img/facial despues.jpg" class="w-full h-40 sm:h-56 object-cover brightness-110" alt="Después facial">
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 text-center font-medium mt-4">Protocolo antiedad con hidratación profunda y Dermapen.</p>
+                        </div>
+                    </div>
+
+                    <!-- Caso 2: Tratamiento Corporal -->
+                    <div class="bg-marca-pinkLight/20 rounded-[2rem] p-6 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-pink-100 fade-in-up delay-100">
+                        <h4 class="text-2xl font-heading font-bold text-marca-dark mb-6 text-center">Modelado Corporal</h4>
+                        <div class="space-y-4">
+                            <div class="flex gap-4">
+                                <div class="w-1/2 relative rounded-xl overflow-hidden border border-gray-200">
+                                    <span class="absolute top-3 left-3 bg-marca-dark text-white text-xs font-bold px-3 py-1 rounded shadow-md z-10">ANTES</span>
+                                    <img src="img/modelado antes.jpg" class="w-full h-40 sm:h-56 object-cover filter sepia-[0.2]" alt="Antes corporal">
+                                </div>
+                                <div class="w-1/2 relative rounded-xl overflow-hidden border border-gray-200 shadow-md">
+                                    <span class="absolute top-3 left-3 bg-marca-pink text-white text-xs font-bold px-3 py-1 rounded shadow-md z-10">DESPUÉS</span>
+                                    <img src="img/modelado despues.jpg" class="w-full h-40 sm:h-56 object-cover brightness-110" alt="Después corporal">
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 text-center font-medium mt-4">Reducción de medidas y reafirmación corporal no invasiva.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonios Ficticios -->
+        <section id="testimonios" class="py-24 bg-marca-pink text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                    <span class="text-pink-200 font-bold tracking-widest uppercase text-sm mb-2 block">Pacientes Felices</span>
+                    <h3 class="text-3xl md:text-5xl font-heading font-bold mb-6">Experiencias en Lunafem</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white text-gray-700 p-8 rounded-3xl shadow-xl fade-in-up relative mt-6">
+                        <div class="flex text-yellow-400 mb-4 text-xl mt-2">★★★★★</div>
+                        <p class="font-medium text-sm mb-6 leading-relaxed">"La Dra. Tembladera me acompañó en mi proceso de fertilidad. Su calidez humana y profesionalismo me dieron la paz que necesitaba en la etapa más importante de mi vida. ¡Pronto seré mamá!"</p>
+                        <p class="font-bold text-marca-pink uppercase tracking-wide text-xs">- Mariana Vargas</p>
+                    </div>
+                    
+                    <div class="bg-white text-gray-700 p-8 rounded-3xl shadow-xl fade-in-up delay-100 relative mt-6">
+                        <div class="flex text-yellow-400 mb-4 text-xl mt-2">★★★★★</div>
+                        <p class="font-medium text-sm mb-6 leading-relaxed">"Mi experiencia con la cesárea humanizada fue mágica. El contacto piel a piel inmediato y tener a mi esposo presente hizo del nacimiento de mi bebé un momento lleno de respeto y amor."</p>
+                        <p class="font-bold text-marca-pink uppercase tracking-wide text-xs">- Lucía Fernández</p>
+                    </div>
+                    
+                    <div class="bg-white text-gray-700 p-8 rounded-3xl shadow-xl fade-in-up delay-200 relative mt-6">
+                        <div class="flex text-yellow-400 mb-4 text-xl mt-2">★★★★★</div>
+                        <p class="font-medium text-sm mb-6 leading-relaxed">"Los tratamientos faciales de Lunafem son increíbles. Me hice una limpieza premium y un protocolo con Dermapen, mi piel luce rejuvenecida e hidratada. La doctora es súper detallista."</p>
+                        <p class="font-bold text-marca-pink uppercase tracking-wide text-xs">- Claudia Ríos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN FAQ -->
+        <section id="faq" class="py-24 bg-white border-t border-gray-100 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 fade-in-up">
+                    <span class="text-marca-pink font-bold tracking-widest uppercase text-sm mb-2 block">Dudas Comunes</span>
+                    <h3 class="text-3xl md:text-5xl font-heading font-bold text-marca-dark mb-6">Preguntas Frecuentes</h3>
+                </div>
+
+                <div class="space-y-4 fade-in-up delay-100">
+                    <details class="group bg-marca-pinkLight/20 rounded-2xl border border-pink-100 shadow-sm cursor-pointer overflow-hidden transition-all duration-300">
+                        <summary class="flex justify-between items-center font-bold text-lg text-marca-dark p-6 outline-none">
+                            ¿Qué es exactamente una Cesárea Humanizada?
+                            <span class="transition-transform duration-300 group-open:rotate-180 text-marca-pink">
+                                <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="text-gray-600 font-medium px-6 pb-6 leading-relaxed">
+                            Es un parto quirúrgico centrado en el respeto y bienestar de la familia. Permitimos el acompañamiento del padre durante la cirugía, propiciamos un ambiente cálido y priorizamos el contacto piel a piel inmediato en la sala de recuperación, siempre que el estado de mamá y bebé lo permita.
+                        </div>
+                    </details>
+
+                    <details class="group bg-marca-pinkLight/20 rounded-2xl border border-pink-100 shadow-sm cursor-pointer overflow-hidden transition-all duration-300">
+                        <summary class="flex justify-between items-center font-bold text-lg text-marca-dark p-6 outline-none">
+                            ¿Cuándo debería agendar una consulta de fertilidad?
+                            <span class="transition-transform duration-300 group-open:rotate-180 text-marca-pink">
+                                <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="text-gray-600 font-medium px-6 pb-6 leading-relaxed">
+                            Si eres menor de 35 años y llevas 12 meses intentando concebir sin éxito, o si eres mayor de 35 y llevas 6 meses. Sin embargo, también puedes agendar una evaluación preventiva para conocer tu reserva ovárica (conteo de folículos y hormona antimulleriana) si deseas planificar tu futuro reproductivo.
+                        </div>
+                    </details>
+
+                    <details class="group bg-marca-pinkLight/20 rounded-2xl border border-pink-100 shadow-sm cursor-pointer overflow-hidden transition-all duration-300">
+                        <summary class="flex justify-between items-center font-bold text-lg text-marca-dark p-6 outline-none">
+                            ¿Qué abarca la Ginecología Estética y Regenerativa?
+                            <span class="transition-transform duration-300 group-open:rotate-180 text-marca-pink">
+                                <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24"><path d="M6 9l6 6 6-6"></path></svg>
+                            </span>
+                        </summary>
+                        <div class="text-gray-600 font-medium px-6 pb-6 leading-relaxed">
+                            Incluye tratamientos diseñados para restaurar la funcionalidad, salud y apariencia íntima femenina. Esto abarca el alivio de los síntomas de la menopausia (como resequedad), rejuvenecimiento íntimo y armonización para mejorar la calidad de vida y seguridad de la paciente.
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sedes -->
+        <section id="sedes" class="py-24 bg-gray-50 border-t border-gray-100 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                    <span class="text-marca-pink font-bold tracking-widest uppercase text-sm mb-2 block">Ubicaciones</span>
+                    <h3 class="text-3xl md:text-5xl font-heading font-bold text-marca-dark mb-6">Nuestras Sedes</h3>
+                    <p class="text-gray-600 text-lg font-medium">Encuéntranos en zonas céntricas y seguras para tu comodidad.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                    <!-- Sede San Borja -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-8 border-marca-pink fade-in-up">
+                        <div class="w-12 h-12 bg-pink-50 text-marca-pink rounded-full flex items-center justify-center mb-6 shadow-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold text-marca-dark mb-2">Sede San Borja</h3>
+                        <p class="text-gray-600 font-medium mb-6">Av. San Borja Nte. 613, San Borja 15037</p>
+                        <a href="https://maps.google.com/?q=Av.+San+Borja+Nte.+613,+San+Borja+15037" target="_blank" class="text-marca-pink font-bold hover:text-marca-pinkDark flex items-center gap-1">
+                            Abrir en Google Maps <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+
+                    <!-- Sede Los Olivos -->
+                    <div class="bg-white rounded-3xl p-8 shadow-sm hover:shadow-lg transition-all duration-300 border-t-8 border-marca-pinkDark fade-in-up delay-100">
+                        <div class="w-12 h-12 bg-pink-50 text-marca-pinkDark rounded-full flex items-center justify-center mb-6 shadow-sm">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.243-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-heading font-bold text-marca-dark mb-2">Sede Los Olivos</h3>
+                        <p class="text-gray-600 font-medium mb-6">Pje los Fobos 176, Los Olivos 15301</p>
+                        <a href="https://maps.google.com/?q=Pje+los+Fobos+176,+Los+Olivos+15301" target="_blank" class="text-marca-pinkDark font-bold hover:text-marca-pink flex items-center gap-1">
+                            Abrir en Google Maps <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer Elegante -->
+    <footer class="bg-marca-dark border-t-4 border-marca-pink pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
+                <!-- Columna 1: Marca -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="h-14 w-14 bg-white rounded-full flex items-center justify-center overflow-hidden border-2 border-marca-pinkLight">
+                            <img src="img/logo.jpg" alt="Logo Lunafem" class="h-full w-full object-cover" onerror="this.style.display='none'">
+                        </div>
+                        <div>
+                            <span class="font-heading font-bold text-2xl tracking-wide text-white leading-none block">Lunafem</span>
+                            <span class="text-[10px] text-gray-400 font-bold uppercase tracking-widest block mt-1">Ginecología Especializada</span>
+                        </div>
+                    </div>
+                    <p class="text-sm leading-relaxed text-gray-400 font-medium mb-6">
+                        Salud femenina integral. Acompañamos cada etapa de tu vida con empatía, profesionalismo y tecnología médica de vanguardia.
+                    </p>
+                </div>
+
+                <!-- Columna 2: Navegación -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 uppercase tracking-wider text-sm">Enlaces Rápidos</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><a href="#nosotros" class="hover:text-marca-pink transition-colors">La Dra. Tembladera</a></li>
+                        <li><a href="#servicios" class="hover:text-marca-pink transition-colors">Tratamientos Especializados</a></li>
+                        <li><a href="#faq" class="hover:text-marca-pink transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#sedes" class="hover:text-marca-pink transition-colors">Sedes y Horarios</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Especialidades -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 uppercase tracking-wider text-sm">Servicios</h4>
+                    <ul class="space-y-3 text-sm text-gray-400 font-medium">
+                        <li><span class="text-marca-pink">•</span> Consulta en Fertilidad</li>
+                        <li><span class="text-marca-pink">•</span> Cesárea Humanizada</li>
+                        <li><span class="text-marca-pink">•</span> Salud Íntima y Menopausia</li>
+                        <li><span class="text-marca-pink">•</span> Estética Facial y Corporal</li>
+                    </ul>
+                </div>
+
+                <!-- Columna 4: Contacto Corto -->
+                <div>
+                    <h4 class="font-bold text-white mb-6 uppercase tracking-wider text-sm">Comunícate</h4>
+                    <ul class="space-y-4 text-sm text-gray-400 font-medium">
+                        <li class="flex items-center gap-3 text-white">
+                            <svg class="w-5 h-5 text-marca-pink shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <span class="font-bold text-base">904 148 850</span>
+                        </li>
+                    </ul>
+                    
+                    <div class="flex gap-4 mt-8">
+                        <a href="https://www.facebook.com/LunafemGinecologiaEspecializada?locale=es_LA" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-marca-pink transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.469h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.469h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        </a>
+                        <a href="https://www.instagram.com/ginecologialunafem" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-marca-pink transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.203 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        </a>
+                        <a href="https://www.tiktok.com/@ginecologialunafem" target="_blank" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-white hover:bg-marca-pink transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.16-3.44-3.37-3.46-5.7-.02-1.29.3-2.58.95-3.71 1.09-1.99 3.16-3.23 5.4-3.4 1.25-.1 2.5.15 3.63.7v4.13c-1.62-.51-3.48-.3-4.78.8-1.07.89-1.57 2.37-1.25 3.73.34 1.4 1.63 2.53 3.07 2.63 1.28.09 2.59-.44 3.29-1.48.5-.74.75-1.64.73-2.54-.04-4.57-.02-9.14-.02-13.71z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center text-xs text-gray-500 font-bold uppercase tracking-widest border-t border-gray-800 pt-8 mt-4">
+                <p>© 2026 Lunafem Ginecología Especializada. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mobile Menu
+            const btnOpen = document.getElementById('mobile-menu-btn');
+            const btnClose = document.getElementById('close-menu-btn');
+            const sidebar = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            function openMenu() {
+                sidebar.classList.remove('hidden');
+                setTimeout(() => { sidebar.classList.remove('translate-x-full'); }, 20);
+            }
+            function closeMenu() {
+                sidebar.classList.add('translate-x-full');
+                setTimeout(() => { sidebar.classList.add('hidden'); }, 300);
+            }
+
+            if (btnOpen) btnOpen.addEventListener('click', openMenu);
+            if (btnClose) btnClose.addEventListener('click', closeMenu);
+            mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+
+            // Scroll Reveal Animation
+            const revealElements = document.querySelectorAll('.fade-in-up');
+            const revealObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target); 
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            const counters = document.querySelectorAll(".counter");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+
+                    counters.forEach(counter => {
+                        const target = parseFloat(counter.dataset.target);
+                        const decimal = target % 1 !== 0;
+
+                        let current = 0;
+                        const increment = target / 60;
+
+                        function animate() {
+                            current += increment;
+
+                            if (current < target) {
+                                counter.textContent = decimal
+                                    ? current.toFixed(1)
+                                    : Math.floor(current);
+                                requestAnimationFrame(animate);
+                            } else {
+                                counter.textContent = decimal
+                                    ? target.toFixed(1)
+                                    : target;
+                            }
+                        }
+
+                        animate();
+                    });
+
+                    observer.disconnect();
+                });
+            }, { threshold: 0.5 });
+
+            observer.observe(document.querySelector(".counter-section"));
+
+            const counterSection = document.querySelector('.counter-section');
+            if (counterSection) {
+                counterObserver.observe(counterSection);
+            }
+        });
+    </script>
+</body>
+</html>
