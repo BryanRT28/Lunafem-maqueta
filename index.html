@@ -118,50 +118,142 @@
     </a>
 
     <main>
-      <!-- Hero Section Estilo Editorial / Boutique (Altura Optimizada) -->
-        <header class="relative w-full flex items-center bg-marca-pinkLight/30 py-12 lg:py-20 overflow-hidden min-h-[60vh] lg:min-h-[75vh]">
-            
-            <!-- Contenedor de la Imagen (Ocupa el 65% derecho en Desktop, 100% arriba en móvil) -->
-            <div class="absolute top-0 right-0 w-full lg:w-[65%] h-[45vh] lg:h-full z-0">
-                <img src="img/portada.png" alt="Dra. Guadalupe Tembladera" class="w-full h-full object-cover object-top lg:object-center">
-                <!-- Overlay degradado solo para móvil para fusionar la imagen con el fondo -->
-                <div class="absolute inset-0 bg-gradient-to-t from-marca-pinkLight/80 via-transparent to-transparent lg:hidden"></div>
-            </div>
+        
+        <header>
 
-            <!-- Contenedor del contenido principal -->
-            <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex items-center mt-[30vh] sm:mt-[35vh] lg:mt-0">
-                
-                <!-- Tarjeta de Contenido Editorial Superpuesta -->
-                <div class="w-full lg:w-[55%] xl:w-[50%] bg-white/95 backdrop-blur-xl p-8 sm:p-10 lg:p-12 rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(216,27,96,0.15)] border border-pink-50 fade-in-up">
-                    
-                    <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-marca-pink/10 text-marca-pink text-[11px] sm:text-xs font-bold tracking-widest uppercase mb-5">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path></svg>
-                        Ginecología & Estética
-                    </span>
-                    
-                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-marca-dark tracking-tight mb-5 leading-[1.15]">
-                        Cuidando de ti, <br>
-                        <span class="text-marca-pink italic font-normal">Mujer a Mujer</span>
-                    </h1>
-                    
-                    <!-- Línea decorativa sutil -->
-                    <div class="w-14 h-1 bg-marca-pink mb-5 rounded-full"></div>
-                    
-                    <p class="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed font-medium">
-                        Acompañamos cada etapa de tu vida. Desde la salud íntima y planificación familiar, hasta la armonización estética y rejuvenecimiento con tecnología de vanguardia.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="https://wa.me/51904148850?text=Hola,%20deseo%20agendar%20una%20cita%20con%20la%20Dra.%20Tembladera." target="_blank" class="bg-marca-pink text-white px-7 py-3.5 sm:py-4 rounded-2xl font-bold text-base sm:text-lg hover:bg-marca-pinkDark transition-all shadow-lg shadow-marca-pink/30 text-center">
-                            Agendar Evaluación
-                        </a>
-                        <a href="#servicios" class="bg-marca-pinkLight/30 border border-marca-pink/20 text-marca-pink hover:bg-marca-pinkLight/60 px-7 py-3.5 sm:py-4 rounded-2xl font-bold text-base sm:text-lg transition-colors text-center">
-                            Ver Especialidades
-                        </a>
-                    </div>
-                    
+            <!-- ==================== HERO MÓVIL ==================== -->
+            <section class="relative lg:hidden bg-marca-pinkLight/20">
+
+                <!-- Imagen -->
+                <div class="relative h-[36vh] overflow-hidden">
+                    <img
+                        src="img/portada.png"
+                        alt="Dra. Guadalupe Tembladera"
+                        class="w-full h-full object-cover object-center">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/30 to-transparent"></div>
                 </div>
-            </div>
+
+                <!-- Tarjeta -->
+                <div class="relative -mt-14 px-5 pb-8 z-10">
+
+                    <div class="bg-white rounded-[2rem] shadow-xl p-7">
+
+                        <span class="inline-flex items-center gap-2 py-2 px-4 rounded-full bg-marca-pink/10 text-marca-pink text-[11px] font-bold tracking-widest uppercase mb-5">
+
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                            </svg>
+
+                            Ginecología & Estética
+                        </span>
+
+                        <h1 class="text-4xl font-heading font-bold text-marca-dark leading-tight mb-4">
+                            Cuidando de ti,
+                            <span class="block text-marca-pink italic font-normal">
+                                Mujer a Mujer
+                            </span>
+                        </h1>
+
+                        <div class="w-14 h-1 bg-marca-pink rounded-full mb-5"></div>
+
+                        <p class="text-gray-600 leading-relaxed mb-7">
+                            Acompañamos cada etapa de tu vida. Desde la salud íntima y planificación familiar, hasta la armonización estética y rejuvenecimiento con tecnología de vanguardia.
+                        </p>
+
+                        <div class="space-y-3">
+
+                            <a href="https://wa.me/51904148850?text=Hola,%20deseo%20agendar%20una%20cita%20con%20la%20Dra.%20Tembladera."
+                            target="_blank"
+                            class="block w-full bg-marca-pink text-white py-4 rounded-2xl text-center font-bold shadow-lg">
+
+                                Agendar Evaluación
+
+                            </a>
+
+                            <a href="#servicios"
+                            class="block w-full border border-marca-pink/30 text-marca-pink py-4 rounded-2xl text-center font-bold">
+
+                                Ver Especialidades
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <!-- ==================== HERO ESCRITORIO ==================== -->
+            <section class="hidden lg:flex relative w-full items-center bg-marca-pinkLight/30 py-20 overflow-hidden min-h-[75vh]">
+
+                <!-- Imagen -->
+                <div class="absolute inset-0 z-0 overflow-hidden">
+
+                    <img
+                        src="img/portada.png"
+                        alt="Dra. Guadalupe Tembladera"
+                        class="absolute inset-0 w-full h-full object-cover object-right">
+
+                    <div class="absolute inset-y-0 left-0 w-[45%] bg-gradient-to-r from-marca-pinkLight/30 via-marca-pinkLight/20 to-transparent"></div>
+
+                </div>
+
+                <!-- Contenido -->
+                <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+
+                    <div class="w-[48%] bg-white/95 backdrop-blur-xl p-12 rounded-[2.5rem] shadow-[0_20px_50px_-12px_rgba(216,27,96,0.15)]">
+
+                        <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-marca-pink/10 text-marca-pink text-xs font-bold tracking-widest uppercase mb-5">
+
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/>
+                            </svg>
+
+                            Ginecología & Estética
+
+                        </span>
+
+                        <h1 class="text-6xl font-heading font-bold text-marca-dark leading-tight mb-5">
+                            Cuidando de ti,<br>
+                            <span class="text-marca-pink italic font-normal">
+                                Mujer a Mujer
+                            </span>
+                        </h1>
+
+                        <div class="w-14 h-1 bg-marca-pink rounded-full mb-5"></div>
+
+                        <p class="text-lg text-gray-600 leading-relaxed mb-8">
+                            Acompañamos cada etapa de tu vida. Desde la salud íntima y planificación familiar, hasta la armonización estética y rejuvenecimiento con tecnología de vanguardia.
+                        </p>
+
+                        <div class="flex gap-4">
+
+                            <a href="https://wa.me/51904148850?text=Hola,%20deseo%20agendar%20una%20cita%20con%20la%20Dra.%20Tembladera."
+                            target="_blank"
+                            class="bg-marca-pink text-white px-8 py-4 rounded-2xl font-bold shadow-lg">
+
+                                Agendar Evaluación
+
+                            </a>
+
+                            <a href="#servicios"
+                            class="border border-marca-pink/30 text-marca-pink px-8 py-4 rounded-2xl font-bold">
+
+                                Ver Especialidades
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
         </header>
 
         <!-- Feature Bar ESTÁTICA (Sin animaciones) -->
